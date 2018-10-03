@@ -1,0 +1,24 @@
+
+<div class="main">
+    <div class="public_pa">
+		<b>ssl证书设置 ({{if $ssl==1}}<font color='green'>状态成功</font>{{else}}<font
+			color=red>状态失败</font>{{/if}}) 
+		</b>
+	</div>
+
+<form action='?c=index&a=ssl' method='post'>
+	<table class="table" cellpadding="0" cellspacing="1">
+		<tr>
+			<td>ssl证书内容:</td>
+			<td><textarea name='certificate' cols=80 rows=8 class="span7">{{$certificate}}</textarea></td>
+		</tr>
+		<tr>
+			<td>ssl密钥内容:</td>
+			<td><textarea name='certificate_key' cols=80 rows=8 class="span7">{{$certificate_key}}</textarea></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="padding-left:400px;"><input type='submit' value='提交' class="btn btn-primary"></td>
+		</tr>
+	</table>
+</form>
+</div>

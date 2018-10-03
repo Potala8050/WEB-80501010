@@ -1,0 +1,67 @@
+<script language='javascript' src='//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/js/domain.js'></script>
+
+<div class="main">
+	<div class="public_pa">域名绑定</div>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th style="border-left:0">操作</th>
+				<th>域名</th>
+				<th>{{if $user.cdn}}ip{{else}}目录{{/if}}</th>
+			</tr>
+		</thead>
+		{{foreach from=$list item=row}}
+		<tr id='{{$row.id}}t'>
+			<td style="border-left:0">[<a href="javascript:domain_del('{{$row.name}}',{{$row.id}})">删除</a>]</td>
+			<td><a href='http://{{$row.name}}' target='_blank'>{{$row.name}}</a></td>
+			<td>{{$row.value}}</td>
+		</tr>
+		{{/foreach}}
+
+	</table>
+
+	<form name='nodeform' action="javascript:domain_add();" method="post">
+		<table class="table">
+			<thead>
+				<tr>
+					<th colspan='2'>注意：系统赠送的临时域名仅供临时测试，每次访问都会受限制，绑定的自有域名不会被限制。</th>
+				</tr>
+				<tr>
+					<th colspan='2'>在添加绑定之前请先解析域名，如果您购买了独立IP，请将域名解析到您的独立IP地址。否则请解析到下面的服务默认地址，</th>
+				</tr>
+				<tr>
+					<th colspan='2'>请使用<font color='red'> CNAME </font>方式将自有域名解析至服务专用地址：<font color='red'>{{$user.name}}{{$domain_note}}</font></th>
+				</tr>
+			</thead>
+			<tr>
+				<td style="width:70px">域名</td>
+				<td><input type='text' size='40' name='domain' id='domain' value="{{$domain.domain}}" /></td>
+			</tr>
+
+			{{if $subdir_flag}}
+			<tr>
+				<td style="width:70px">{{if $user.cdn}}IP{{else}}目录{{/if}}</td>
+				<td><input type='text' name='subdir' id='subdir' value="{{$default_subdir}}" size='40' /></td>
+			</tr>
+			{{/if}}
+			<tr>
+				<td style="width:70px">&nbsp;</td>
+				<td>
+				<input type="button" id='button' class="btn btn-warning" onclick='domain_add();' value="确定添加" />
+				</td>
+			</tr>
+				<tr>
+					<th colspan='2'>提示：已经支持自行添加泛域名，无需在提交工单，比如 *.qiangidc.com </th>
+				</tr>
+				<tr>
+					<th colspan='2'>提示：上海，北京，广州，四川，香港等机房的独立IP充足，3年仅需85元，支持自由换绑同机房的虚拟主机，请联系为您分配的售后专员购买。</th>
+				</tr>
+				<tr>
+					<th colspan='2'>提示：域名绑定到服务器是实时生效的，但域名解析成功的时间是根据域名DNS提供商来决定的，一般不超过30分钟即可生效。 </th>
+				</tr>
+		</table>
+	</form>
+</div>
+<script>
+	nodeform.domain.focus();
+</script>

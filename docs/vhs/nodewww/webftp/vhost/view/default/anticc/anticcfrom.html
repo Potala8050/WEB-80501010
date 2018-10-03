@@ -1,0 +1,50 @@
+<script language='javascript' src='//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/js/anticc.js'></script>
+
+<div class='pro_msg' style="display: none" id='msg'></div>
+
+<div class="main" style="padding-bottom:10px">
+    <div class="public_pa">防CC攻击设置</div>
+<form action='?c=anticc&a=anticcAdd' method='post'>
+	<table class="table" style="margin:10px 0" cellpadding="0" cellspacing="1">
+		<tr>
+		    <td style="border:0;text-align:center;width:80px;">
+			    {{if $at==0}}
+				<a href="javascript:anticc_checkon(1)" title='开启功能'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/start_on.png" border="0" /></a>
+		        {{else}}
+				<a href="javascript:anticc_checkon(2)" title='禁用功能'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/start_off.png" border="0" /></a>
+	        	{{/if}}
+			</td>
+			<td style="border:0">&nbsp;&nbsp;
+			    <select name='mode' id='mode'>
+					<option value="http_redirect">普通模式</option>
+					<option value="js_concat">加强模式</option>
+			    </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    请求次数：<input name='request' size='5' value='0' id='request' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    请求时间：<input name='second' size='5' value='0' id='second' />&nbsp;秒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    <input type='button' value='提交' onclick='anticc_add();' class="btn btn-warning" />
+			</td>
+		</tr>
+	</table>
+</form>
+
+<table class="table table-bordered" style="border-top:1px solid #bbb" cellpadding="0" cellspacing="1">
+    <thead>
+	<tr>
+		<th style="border-left:0">操作</th>
+		<th>请求次数</th>
+		<th>请求时间</th>
+		<th>开启白名单</th>
+	</tr>
+	</thead>
+	{{foreach from=$cc item=row}}
+	<tbody>
+	<tr>
+		<td style="border-left:0"><a href="javascript:anticc_del({{$row.id}})">删除</a></td>
+		<td>{{$row.request}}</td>
+		<td>{{$row.second}} 秒</td>
+		<td>{{if $row.wl==1}}是{{else}}否{{/if}}</td>
+	</tr>
+	</tbody>
+	{{/foreach}}
+</table>
+</div>

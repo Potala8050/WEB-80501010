@@ -1,0 +1,80 @@
+<div class="main">
+    <div class="public_pa">数据备份</div>
+	<table class="table" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th>数据容灾备份方案01-自动备份所有文件</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="border:0">双SSD磁盘组RAID1，保证一块硬盘故障时可以从另一块硬盘恢复数据。</td>
+		</tr>
+	</tbody>
+	</table>
+	<table class="table" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th>数据容灾备份方案02-自动备份所有文件</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="border:0">异地机房15天容灾保护，服务器会在北京时间每天04:00开始对您的网站WEB文件和SQL文件进行数据备份，并上传到我们的备份存储服务器，您的网站备份数据会在备份存储服务器保留15个副本，如果您自己不慎误删除了自己的网站数据，可发起技术工单申请恢复15天内的数据。我们对此收取一定的人工服务费，目前人工的服务费是每次 10.00CNY。(目前仅支持非共享节点的广州，上海，北京，四川，香港，美国，日本，新加坡等机房的Linux虚拟主机产品)</td>
+		</tr>
+	</tbody>
+	</table>
+<form name='bakupweb' action="?c=shell&a=bakupweb" method="post" target='_blank'>
+	<table class="table" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th>数据容灾备份方案03-手动备份WEB文件</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="border:0">手动备份：<input name='password' value='' />&nbsp;<input type='submit' value='开始备份' class="btn btn-warning" />&nbsp;(可选加密密码，在恢复数据时需要此密码，不需要加密请留空)</td>
+		</tr>
+	</tbody>
+	</table>
+</form>
+
+{{if $user.db_quota>0 && $user.db_type!='sqlsrv'}}
+<form name='mysqlout' action="?c=shell&a=mysqldumpout" method="post" target='_blank'>
+	<table class="table" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th>数据容灾备份方案04-手动备份SQL文件</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="border:0">手动备份：<input type='password' name='passwd' id='passwd' />&nbsp;<input type='submit' value='开始备份' class="btn btn-warning" />&nbsp;(请输入正确的SQL用户密码)</td>
+		</tr>
+	</tbody>
+	</table>
+</form>
+
+<form name='remotemysqldumpin' action="?c=shell&a=remotemysqldumpin" method="post" target='_blank'>
+	<table class="table" cellpadding="0" cellspacing="1">
+	<thead>
+		<tr>
+			<th colspan="3">远程数据库导入</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="border:0">远程数据库IP：<input type='text' name='rehost' id='rehost' size='16' /></td>
+			<td style="border:0">远程数据库账号：<input type='text' name='reuser' id='reuser' size='16' /></td>
+			<td style="border:0">远程数据库密码：<input type='password' name='repasswd' id='repasswd' size='16' /></td>
+		</tr>
+		<tr>
+			<td style="border:0">远程数据库名：<input type='text' name='redate' id='redate' size='16' /></td>
+			<td style="border:0">本地数据库密码：<input type='password' name='passwd' id='passwd' size='16' /></td>
+			<td style="border:0"><input type='submit' value='确定' class="btn btn-warning" /></td>
+		</tr>
+	</tbody>
+	</table>
+</form>
+{{/if}}
+</div>
