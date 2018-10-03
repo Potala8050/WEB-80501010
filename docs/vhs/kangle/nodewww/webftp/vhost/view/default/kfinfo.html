@@ -1,0 +1,207 @@
+﻿<script type='text/javascript'>
+var msg = '{{$msg}}';
+	function changePassword() {
+	}
+	function rebootProcess()
+	{
+		if (confirm("确定要重启吗？这将对你现在运行中的网站中断请求！")) {
+			$.get("?c=index&a=rebootProcess", function(data) {
+				alert(data);
+			});
+		}
+	}
+	jQuery(document).ready(function() {
+		jQuery(".item").mouseover(function() {
+			jQuery(this).addClass('onMouseOver');
+		});
+		jQuery(".item").mouseout(function() {
+			jQuery(this).removeClass('onMouseOver');
+		});
+		if (msg != '') {
+			var dlog = art.dialog({id:'id232',time:3,content:msg,title:'提示',icon: 'warning',top:'53%'});
+		}
+	});
+	var webmit = '{{$user.web_quota}}';//{{$quota.web_limit}}在linux下得不到
+	if (webmit == '') {
+		webmit = 0;
+	}
+	if (webmit > 0) {
+		var web_used = '{{$quota.web_used}}';
+		if (web_used == '') {
+			web_used = 0;
+		}
+		var web_use_len = (web_used / webmit) * 100;
+		//web_use_len = 30;
+		var dbmit = '{{$quota.db_limit}}';
+		var db_used = '{{$quota.db_used}}';
+		if (db_used == '') {
+			db_used = 0;
+		}
+		if (dbmit == "") {
+			dbmit = 0;
+		}
+		if (dbmit > 0) {
+			var db_use_len = (db_used / dbmit) * 100;
+		}
+		jQuery(document).ready(function() {
+			if (web_use_len != null && web_use_len != 'undefined') {
+								if (web_use_len < 1) {
+									web_use_len = 1;
+								}
+								if (web_use_len > 100) {
+									web_use_len = 100;
+								}
+								jQuery("#webdd").html("网页空间：<div class='web_ww' title='大小："
+														+ webmit
+														+ "M   已使用："
+														+ web_use_len.toFixed(2)
+														+ "%'><div class='use_web' style='width:"
+														+ web_use_len.toFixed(2)
+														+ "%'></div></div>");
+							}
+							if (db_use_len != null && db_use_len != 'undefined') {
+								if (db_use_len < 1) {
+									db_use_len = 1;
+								}
+								if (db_use_len > 100) {
+									db_use_len = 100;
+								}
+								jQuery("#db").html("数据空间：<div class='web_ww' title='大小："
+														+ dbmit
+														+ "M   已使用："
+														+ db_use_len.toFixed(2)
+														+ "%'><div class='use_web' style='width:"
+														+ db_use_len.toFixed(2)
+														+ "%'  ></div></div>");
+							}
+						});
+	}
+</script>
+
+<div id="ep_main2">
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">网站加速</div>
+	    <ul>
+			<li><a href='?c=response&a=gzipFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/wyys.png" style="background:#d97da6"/><span>网页压缩</span></a></li>
+			<li><a href='?c=cache&a=cacheFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/hcsz.png" style="background:#4c4c4c"/><span>缓存设置</span></a></li>
+			<li><a href="?c=cacheclean&a=cachecleanFrom"><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/qchc.png" style="background:#0e85c9"/><span>清除缓存</span></a></li>
+			{{if $user.cdn==0}}
+		</ul>
+    </div>
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">常用功能</div>
+	    <ul>
+		    <li><a href='?c=domain&a=show'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/ymbd.png" style="background:#77cdf0;"/><span>域名绑定</span></a></li>
+			<li><a href='?c=indexfile&a=indexfileFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/mrwj.png" style="background:#8ed3f2"/><span>默认文件</span></a></li>
+			<li><a href='?c=rewrite&a=rewriteFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/ymtz.png" style="background:#eb466e"/><span>域名跳转</span></a></li>
+			<li><a href='javascript:rebootProcess();'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/cqjc.png" style="background:#f1c958"/><span>重起进程</span></a></li>
+		</ul>
+    </div>
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">基本功能</div>
+	    <ul>
+		    <li><a href='?c=session&a=changePasswordForm'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/xgmm.png" style="background:#ec5657"/><span>修改密码</span></a></li>
+			<li><a href='?c=info&a=showErrorPage'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/cwmdy.png" style="background:#fac867"/><span>错误码定义</span></a></li>
+			<li><a href='?c=mime&a=mimeFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/mimesz.png" style="background:#1b96d2"/><span>MIME设置</span></a></li>
+			{{if $dbadmin_url}}
+			<li><a href='//10101010-1.console-vhost.qiangidc.cn/mysql/' target='_blank'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/sjkgl.png" style="background:#56aede"/><span>数据库管理</span></a></li>
+			{{/if}} {{/if}}
+		</ul>
+    </div>
+			 
+	{{if $user.cdn==0}}
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">空间管理</div>
+	    <ul>
+		    {{if $webftp_url}}
+			<li><a href='{{$webftp_url}}'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/zxwj.png" style="background:#e9654c"/><span>文件管理</span></a></li>
+			{{/if}}
+		    <li><a href='?c=shell&a=index'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/sjbf.png" style="background:#618fb1"/><span>数据备份</span></a></li>
+			<li><a href='?c=index&a=ftpForm'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/ftpsz.png" style="background:#7f7f7f"/><span>FTP设置</span></a></li>
+			{{if $user.ssi}}
+			<li><a href='?c=ssi&a=show'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/xgmxx.png" style="background:#ec5657"/><span>SSI设置</span></a></li>
+            {{/if}}
+		</ul>
+    </div>
+	{{/if}}
+	
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">高级功能</div>
+	    <ul>
+			<li><a href="?c=speed&a=speedFrom"><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/dkxz.png" style="background:#537cbe"/><span>带宽限制</span></a></li>
+			<li><a href='?c=index&a=sslForm'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/xgmxx.png" style="background:#ec5657"/><span>SSL证书</span></a></li>
+		    <li><a href='?c=flow&a=viewFlow&t=day'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/llt.png" style="background:#8ccfdf"/><span>流量分析</span></a></li>
+		    <li><a href='?c=connection&a=connectionFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/ljxx.png" style="background:#f29200"/><span>连接信息</span></a></li>
+			{{if $user.cdn==0}}
+			<li><a href='?c=capability&a=capabilityFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/xnfx.png" style="background:#394c8e"/><span>性能分析</span></a></li>
+			{{if $user.cron>0}}
+			<li><a class="jhrw" href='?c=cron&a=index'>计划任务</a></li>
+			{{/if}}
+			{{/if}}
+		</ul>
+    </div>
+	
+    <div class="ep_main2_general">
+	    <div class="ep_main_title">安全防护</div>
+	    <ul>
+			<li><a href='?c=banip&a=addTableFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/jzip.png" style="background:#24b7eb"/><span>禁止IP</span></a></li>
+		    <li><a href='?c=protection&a=addProtectionTableFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/fdl.png" style="background:#fcc433"/><span>防盗链</span></a></li>
+			<li><a href='?c=antisql&a=antisqlFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/csgl.png" style="background:#e73b3b"/><span>参数过滤</span></a></li>
+			<li><a href='?c=antiupload&a=antiuploadFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/fmmsc.png" style="background:#b18abf"/><span>防木马上传</span></a></li>
+			<li><a href='?c=anticc&a=anticcFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/fccgj.png" style="background:#a0cd92"/><span>防CC攻击</span></a></li>
+			<li><a href='?c=httpauth&a=index'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/httprz.png" style="background:#eb466e"/><span>HTTP认证</span></a></li>
+		</ul>
+    </div>
+</div>
+
+<div id="ep_main3">
+	<div class="ep_main_title">主机信息</div>
+	    <ul>
+		    
+			{{if $user.expire_time2 !=0}}
+			<li>到期时间：{{date("Y-m-d H:i:s",$user.expire_time2)}}</li>
+			{{/if}}
+			<li>主机状态：{{if $user.status==3}}<font color='red'>数据库超限</font>{{elseif $user.status==2}}<font color='red'>超流量</font>{{elseif $user.status==1}}<font color='red'>暂停</font>{{else}}<span class="vhost_check">正常{{/if}}</span></li>
+	        {{if $user.cdn==0}}
+			<li id="webdd"></li>
+			{{if $quota.db_limit}}
+			<li id="db"></li>
+			{{if $user.db_type!='sqlsrv'}}
+			<li>节点编号：BHS10101010</li>
+			<li>存储目录：{{$user.doc_root}}</li>
+			<li>域名限制：{{if $user.domain==-1}}不限{{else}}{{$user.domain}}个{{/if}}</li>
+			<li>连接限制：{{if $user.max_connect==0}}不限{{else}}{{$user.max_connect}}{{/if}}</li>
+			{{if $user.cdn==0}}
+			<li>流量限制：{{if $user.flow_limit}}{{$user.flow_limit}}G/月{{else}}不限{{/if}}</li>
+			<li>本月流量：{{number_format($flow.flow/1024,2)}}M</li>
+			<li>缓存命中：{{if $flow.flow>0}}{{number_format($flow.flow_cache*100/$flow.flow,2)}}%{{else}}0%{{/if}}</li>
+	        <div class="ep_main_title">主机账户</div>
+	        <li>FTP地址：10101010.bhs.qiangidc.vip</li>
+	        <li>FTP端口：51021</li>
+	        <li>FTP账号：{{$user.name}}</li>
+	        <li>FTP密码：初始密码已发送邮件，或自行修改</li>
+			<li>SQL地址：{{$node.db_host}}</li>
+			<li>SQL端口：{{$node.db_port}}</li>
+			{{/if}}
+			<li>SQL名称：{{$user.db_name}}</li>
+			<li>SQL用户：{{$user.db_name}}</li>
+            <li>SQL密码：初始密码已发送邮件，或自行修改</li>
+			{{/if}} {{/if}}
+	        <div class="ep_main_title">脚本语言</div>
+			<li>程序语言：{{if $user.module}}{{$user.module}}{{else}}{{$user.templete}}:{{$user.subtemplete}}{{/if}}</li>
+			<form name='frm' action='?c=index&a=changeSubtemplete' method='post'>
+			<li id="col_gray">版本切换： 
+			<select name='subtemplete' onChange='frm.submit()'>
+				<option value=''>--请选择版本--</option>
+				{{foreach from=$subtempletes item=subtemplete}}
+				<option value='{{$subtemplete}}'{{if $subtemplete==$user.subtemplete}}selected{{/if}}>{{$subtemplete}}</option>
+				{{/foreach}}
+			</select>
+			</li>
+			</form>
+			{{/if}} {{if $module_link}}
+			<li>{{$module_link}}</li>
+			{{/if}}
+		</ul>
+</div>
+	<div style="clear:both"></div>
