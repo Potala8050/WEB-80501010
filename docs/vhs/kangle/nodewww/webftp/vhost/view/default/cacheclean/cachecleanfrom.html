@@ -7,7 +7,7 @@
 		var url_arr = url.split("\n");
 		var clean_url = "";
 		for (i = 0; i < url_arr.length; i++) {
-			if (url_arr[i].substr(0, 7) != 'http://') {
+			if (url_arr[i].substr(0, 7) != 'http://' && url_arr[i].substr(0, 8) != 'https://') {
 				return alert("输入错误，请检查每个url前面必需有http://");
 			}
 			if (url_arr[i].substr(-1) == '*') {
@@ -24,23 +24,44 @@
 			}
 		});
 	}
+	function domain_cache_clean() {
+		var domain = $("#domain").val();
+		if (domain == "") {
+			return alert('请先选择一个域名');
+		}
+		var clean_url = "3http://"+domain+"/, 3https://"+domain+"/, ";
+		$.ajax({
+			type : "POST",
+			url : '?c=cacheclean&a=cacheclean',
+			data : "url=" + clean_url,
+			success : function(msg) {
+				alert(msg);
+			}
+		});
+	}
 </script>
 <div class='pro_msg' style="display: none" id='msg'></div>
 <div class="main">
     <div class="public_pa">清除缓存</div>
-<form action='javascript:cache_clean();' method='post'>
+<form method='post'>
 	<table class="table" cellpadding="0" cellspacing="1">
 		<tr>
-			<th colspan='2'>提示：每行一个url， </th>
+			<th style="border:0">清除整个域名缓存</th>
 		</tr>
 		<tr>
-			<th colspan='2'>清除某个页面的示例：<u>http://www.qiangidc.com/</u> 或 <u>http://www.qiangidc.com/123456.html</u> </td>
+			<td style="border:0">
+				选择域名&nbsp;&nbsp;
+				<select name="domain" id="domain">
+				{{foreach from=$list item=row}}<option value="{{$row}}">{{$row}}</option>{{/foreach}}
+				</select>
+				&nbsp;&nbsp;<input type='button' value='提交' onclick='domain_cache_clean();' class="btn btn-warning" />
+			</td>
 		</tr>
 		<tr>
-			<th colspan='2'>清除指定文件夹下的内容： <u>http://www.qiangidc.com/test/</u></td>
+			<th>清除单个URL网址缓存</th>
 		</tr>
 		<tr>
-			<th colspan='2'>清除整个域名下的缓存：<u>http://www.qiangren.net/*</u></td>
+			<td style="border:0">每行一个url，例：<u>http://www.qiangidc.com/</u> 或 <u>http://www.qiangidc.com/web/</u> 支持通配符*</td>
 		</tr>
 		<tr>
 			<td style="border:0"><textarea name="url" id='url' class="span5" cols='62' rows='6'></textarea></td>
@@ -49,10 +70,10 @@
 			<td style="border:0"><input type='button' value='提交' onclick='cache_clean();' class="btn btn-warning" /></td>
 		</tr>
 		<tr>
-			<th colspan='2'>提示：系统赠送的临时域名是不受缓存约束的，它是永远不会缓存，所以可以通过系统赠送的临时域名来判断资源是否已更新。 </th>
+			<td>清除节点缓存之后可能还需要清除浏览器的缓存或按Ctrl+F5刷新页面才能看到最新的页面。</td>
 		</tr>
 		<tr>
-			<th colspan='2'>提示：如果网站频繁的更新静态内容不想频繁的进行清除缓存可以发起技术工单将网站迁移到不提供加速的服务器上。	</th>
+			<td>系统赠送的临时域名是不受缓存约束的，它是永远不会缓存，所以可以通过系统赠送的临时域名来判断资源是否已更新。</td>
 		</tr>
 	</table>
 </form>

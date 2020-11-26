@@ -1,22 +1,23 @@
 
 <div class="main">
     <div class="public_pa">
-		<b>ssl证书设置 ({{if $ssl==1}}<font color='green'>状态成功</font>{{else}}<font
-			color=red>状态失败</font>{{/if}}) 
+		<b>单域名ssl证书设置 ({{if $ssl==1}}<font color='green'>状态成功</font>{{else}}<font
+			color=red>状态失败</font>{{/if}}) [<a
+			href='https://freessl.cn/' target='_blank'>ssl证书在线生成</a>]
 		</b>
 	</div>
 
-<form action='?c=index&a=ssl' method='post'>
+<form action='?c=index&a=domainSsl' method='post'>
 	<table class="table" cellpadding="0" cellspacing="1">
-		{{if $user.cdn}}<tr>
-			<th colspan="2">此处是当前账号的SSL证书设置，对所有绑定域名生效。如果你已经设置过单个域名的SSL证书，则不需要再设置此处的证书。SSL证书优先级：域名>账号</td>
-		</tr>{{/if}}
+		<tr>
+			<th colspan="2">此处是域名<font color="red">{{$domain}}</font>的SSL证书设置<input type="hidden" name="domain" id="domain" value="{{$domain}}"></td>
+		</tr>
 		<tr>
 			<td>ssl证书内容:</td>
 			<td><textarea name='certificate' cols=80 rows=8 class="span7">{{$certificate}}</textarea></td>
 		</tr>
 		<tr>
-			<td>ssl密钥内容:</td>
+			<td>ssl证书密钥内容:</td>
 			<td><textarea name='certificate_key' cols=80 rows=8 class="span7">{{$certificate_key}}</textarea></td>
 		</tr>
 		<tr>
@@ -52,8 +53,8 @@
 <script>
 function ssl_checkon(val)
 {
-	var data = 'status=' + val;
-	functoin_checkon('?c=index&a=sslRewrite',data);
+	var data = 'status=' + val + '&domain=' + $("#domain").val();
+	functoin_checkon('?c=index&a=domainSslRewrite',data);
 }
 function http2_checkon(val)
 {

@@ -37,7 +37,9 @@ var left = null;
 	});
 	jq(document).mousemove(function(){
 		var scrolltop = document.documentElement.scrollTop;
-		dflog.position(left,scrolltop + parseInt(defaulttop) + 'px');
+		if (dflog) {
+			dflog.position(left,scrolltop + parseInt(defaulttop) + 'px');
+		}
 	});
 </script>
 <div id='panel' class='webftp_left' style='display:none'>
@@ -88,7 +90,10 @@ var left = null;
 		</tr>
 		<tr>
 			<td colspan='6'>
-			<a href='?c=webftp&a=cd&file=..'><img src='//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/webftp/up.gif' border='0' /> 上级目录</a><i style="margin-left:240px;">上传zip格式的文件,文件后面会自动显示解压按钮</i>
+			<a href='?c=webftp&a=cd&file=..'>
+			<img src='//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/webftp/up.gif' border='0' />上级目录
+			</a>
+			<i style="margin-left:240px;">上传zip格式的文件,文件后面会自动显示解压按钮</i>
 			</td>
 		</tr>
 		{{foreach from=$files item=file}} {{$tr=$tr+1}}
