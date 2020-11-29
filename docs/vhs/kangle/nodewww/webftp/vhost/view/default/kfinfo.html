@@ -104,7 +104,7 @@ var msg = '{{$msg}}';
 			<li><a href='?c=info&a=showErrorPage'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/cwmdy.png" style="background:#fac867"/><span>错误码定义</span></a></li>
 			<li><a href='?c=mime&a=mimeFrom'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/mimesz.png" style="background:#1b96d2"/><span>MIME设置</span></a></li>
 			{{if $dbadmin_url}}
-			<li><a href='//10101010-1.console-vhost.webpagetest.cn/mysql/' target='_blank'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/sjkgl.png" style="background:#56aede"/><span>数据库管理</span></a></li>
+			<li><a href='//11111111-1.console-vhost.webpagetest.cn/mysql/' target='_blank'><img src="//80201025.web.qiangidc.top/storage/Easypanel/vhost/view/default/style/sjkgl.png" style="background:#56aede"/><span>数据库管理</span></a></li>
 			{{/if}} {{/if}}
 		</ul>
     </div>
@@ -167,7 +167,7 @@ var msg = '{{$msg}}';
 			{{if $quota.db_limit}}
 			<li id="db"></li>
 			{{if $user.db_type!='sqlsrv'}}
-			<li>节点编号：BHS10101010</li>
+			<li>节点编号：BHS11111111</li>
 			<li>存储目录：{{$user.doc_root}}</li>
 			<li>域名限制：{{if $user.domain==-1}}不限{{else}}{{$user.domain}}个{{/if}}</li>
 			<li>连接限制：{{if $user.max_connect==0}}不限{{else}}{{$user.max_connect}}{{/if}}</li>
@@ -176,7 +176,7 @@ var msg = '{{$msg}}';
 			<li>本月流量：{{number_format($flow.flow/1024,2)}}M</li>
 			<li>缓存命中：{{if $flow.flow>0}}{{number_format($flow.flow_cache*100/$flow.flow,2)}}%{{else}}0%{{/if}}</li>
 	        <div class="ep_main_title">主机账户</div>
-	        <li>FTP地址：10101010.bhs.qiangidc.vip</li>
+	        <li>FTP地址：ftp.22222222.qiangidc.vip</li>
 	        <li>FTP端口：51021</li>
 	        <li>FTP账号：{{$user.name}}</li>
 	        <li>FTP密码：初始密码已发送邮件，或自行修改</li>
